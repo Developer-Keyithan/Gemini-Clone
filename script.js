@@ -3,8 +3,8 @@ const chatList = document.querySelector(".chat-list");
 
 let userMessage = null;
 
-// const API_KEY = "AIzaSyAZH2QBU54csCXPiqxOtYuD7x9eTvIh98Q"
-const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCjw5VDc1oqrxtitygygL18sbqa74qR6rw";
+const API_KEY = "AIzaSyAC79yMJtRhjAnrouaN6WC_ww6g4wjhKu0"
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
 // Create a new message element and return it
 const createMessageElement = (content, ...classes) => {
