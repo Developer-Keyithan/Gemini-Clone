@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --text-color: #e3e3e3;
+    --subHeading-color: #828282;
+    --placeholder-color: #a6a6a6;
+    --primary-color: #242424;
+    --secondary-color: #383838;
+    --secondary-hover-color: #444;
+}
+
+body {
+    background: var(--primary-color);
+}
+
+.header, .typing-area {
+    color: var(--text-color);
+}
+
+.header, .chat-list .message, .typing-form {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.header :where(.title, .subtitle) {
+    font-weight: 500;
+    line-height: 3.6rem;
+}
+
+.header {
+    margin-top: 7vh;
+    padding: 1rem;
+    /* display: none; */
+}
+
+.header .title {
+    font-size: 2.7rem;
+    background-clip: text;
+    width: fit-content;
+    background: linear-gradient(to right, #4285f4, #d96570);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header .subtitle {
+    font-size: 2.4rem;
+    color: var(--subHeading-color);
+}
+
+.suggestion-list {
+    margin-top: 9.5vh;
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.suggestion-list .suggestion {
+    padding: 1.25rem;
+    cursor: pointer;
+    width: 260px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-radius: 0.75rem;
+    background: var(--secondary-color);
+    transition: 0.3s ease;
+}
+
+.suggestion-list .suggestion:hover {
+    background: var(--secondary-hover-color);
+}
+
+.suggestion-list .suggestion .text {
+    font-weight: 400;
+}
+
+.suggestion-list .suggestion .icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+.chat-list {
+    padding: 2rem 1rem 12rem;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.chat-list .message.incoming {
+    margin-top: 1.5rem;
+}
+
+.chat-list .message .message-content {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+}
+
+.chat-list .message .avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    align-self: flex-start;
+}
+
+.chat-list .message.loading .avatar {
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.chat-list .message .text {
+    color: var(--text-color);
+    transition: 0.3s ease;
+}
+
+.chat-list .message.loading .text {
+    display: none;
+}
+
+.chat-list .message .icon {
+    height: 35px;
+    width: 35px;
+    display: flex;
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-left: 3.5rem;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    visibility: hidden;
+    transition: 0.3s ease;
+}
+
+.chat-list .message:hover .icon {
+    visibility: visible;
+}
+
+.chat-list .message.loading:hover .icon {
+    visibility: hidden;
+}
+
+.chat-list .message .icon:hover {
+    background: var(--secondary-hover-color);
+}
+
+.chat-list .loading-indicator {
+    display: flex;
+    width: 100%;
+    gap: 0.8rem;
+    flex-direction: column;
+}
+
+.chat-list .loading-indicator .loading-bar {
+    height: 11px;
+    width: 100%;
+    background: linear-gradient(to right, #4285f4, #242424, #4285f4);
+    animation: animate1 3s linear infinite;
+}
+
+.chat-list .loading-indicator .loading-bar:nth-child(2) {
+    animation-delay: 0.5s;
+    background-position: -1140px 0;
+}
+
+.chat-list .loading-indicator .loading-bar:last-child {
+    width: 70%;
+    animation: animate2 2.1s linear infinite;
+}
+
+@keyframes animate1 {
+    0% {
+        background-position: -1140px 0;
+    }
+
+    100% {
+        background-position: 1140px 0;
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        background-position: -798px 0;
+    }
+
+    100% {
+        background-position: 798px 0;
+    }
+}
+
+.typing-area {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 1rem;
+    background: var(--primary-color);
+}
+
+.typing-area :where(.typing-form, .action-button) {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.typing-area .input-wrapper {
+    height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.typing-area .typing-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    border-radius: 6.2rem;
+    padding: 1.1rem 4rem 1.1rem 1.5rem;
+    background: var(--secondary-color);
+    transition: 0.3s ease;
+}
+
+.typing-area .typing-input:focus {
+    background: var(--secondary-hover-color);
+}
+
+.typing-area .typing-input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.typing-area .icon {
+    height: 56px;
+    width: 56px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    transition: 0.3s ease;
+}
+
+.typing-area .icon:hover {
+    background: var(--secondary-hover-color) !important;
+}
+
+.typing-area .input-wrapper .icon {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: 3px;
+    outline: none;
+    border: none;
+    background: none;
+    color: var(--text-color);
+    transform: scale(0);
+    transition: 0.3s ease;
+}
+
+
+.typing-area .input-wrapper .typing-input:valid ~ .icon {
+    transform: scale(1);
+}
+
+.typing-area .disclaimer-text {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--placeholder-color);
+}
