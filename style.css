@@ -19,6 +19,15 @@
     --secondary-hover-color: #444;
 }
 
+.light_mode {
+    --text-color: #222;
+    --subHeading-color: #a0a0a0;
+    --placeholder-color: #6c6c6c;
+    --primary-color: #fff;
+    --secondary-color: #e9eef6;
+    --secondary-hover-color: #dbe1ea;
+}
+
 body {
     background: var(--primary-color);
 }
@@ -40,7 +49,11 @@ body {
 .header {
     margin-top: 7vh;
     padding: 1rem;
-    /* display: none; */
+}
+
+body.hide-header .header {
+    display: none;
+    margin-top: 0;
 }
 
 .header .title {
@@ -104,6 +117,7 @@ body {
     padding: 2rem 1rem 12rem;
     max-height: 100vh;
     overflow-y: auto;
+    scrollbar-color: #999 transparent;
 }
 
 .chat-list .message.incoming {
@@ -140,6 +154,10 @@ body {
     transition: 0.3s ease;
 }
 
+.chat-list .message .text.error {
+    color: #e55865;
+}
+
 .chat-list .message.loading .text {
     display: none;
 }
@@ -164,7 +182,7 @@ body {
     visibility: visible;
 }
 
-.chat-list .message.loading:hover .icon {
+.chat-list .message.loading:hover .icon.hide {
     visibility: hidden;
 }
 
@@ -188,6 +206,10 @@ body {
     width: 100%;
     background: linear-gradient(to right, #4285f4, #242424, #4285f4);
     animation: animate1 3s linear infinite;
+}
+
+body.light_mode .chat-list .loading-indicator .loading-bar {
+    background: linear-gradient(to right, #4285f4, #fff, #4285f4);
 }
 
 .chat-list .loading-indicator .loading-bar:nth-child(2) {
@@ -301,4 +323,48 @@ body {
     margin-top: 1rem;
     text-align: center;
     color: var(--placeholder-color);
+}
+
+@media (max-width: 768px) {
+    .header :is(.title, .subtitle) {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .header .subtitle {
+        font-size: 1.7rem;
+    }
+
+    .chat-list .message .avatar {
+        width: 37px;
+        height: 37px;
+    }
+
+    .typing-area :where(.typing-form, .actions-button) {
+        gap: 0.4rem;
+    }
+
+    .typing-form .input-wrapper {
+        height: 50px;
+    }
+
+    .typing-form .typing-input {
+        padding: 1.1rem 3.5rem 1.1rem 1.2rem;
+    }
+
+    .typing-area .icon {
+        height: 50px;
+        width: 50px;
+    }
+
+    .typing-area .disclaimer-text {
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 1140px) {
+    .chat-list .message .text {
+        padding-right: 40px;
+    }
 }
