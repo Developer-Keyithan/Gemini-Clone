@@ -173,10 +173,14 @@ body {
 }
 
 .chat-list .loading-indicator {
-    display: flex;
+    display: none;
     width: 100%;
     gap: 0.8rem;
     flex-direction: column;
+}
+
+.chat-list .message.loading .loading-indicator {
+    display: flex;
 }
 
 .chat-list .loading-indicator .loading-bar {

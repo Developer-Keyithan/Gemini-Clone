@@ -14,8 +14,20 @@ const createMessageElement = (content, ...classes) => {
     return div;
 }
 
+const showTypingEffect = (text, textElement) => {
+    const words = text.split(' ');
+    let currentWordIndex = 0;
+
+    const typingInterval = setInterval(() => {
+        // Append each word to the text elements with a space
+        textElement.innerText += (currentWordIndex === 0 ? '' : ' ') + words[currentWordIndex++];
+    }, 75)
+}
+
 // fetch response from the API based on user message
-const generateAPIResponse = async () => {
+const generateAPIResponse = async (incomingMessageDiv) => {
+    
+    const textElement = incomingMessageDiv.querySelector(".text"); // Get the text elements
     // Send a POST request to the API with the user's message
     try {
         const response = await fetch(API_URL, {
@@ -31,9 +43,14 @@ const generateAPIResponse = async () => {
 
         const data = await response.json();
 
-        console.log(data);
+        // Get the API response text
+        const apiResponse = data?.candidates[0].content.parts[0].text;
+        showTypingEffect(apiResponse, textElement);
+
     } catch (error) {
         console.log(error);
+    } finally {
+        incomingMessageDiv.classList.remove("loading");
     }
 }
 
@@ -53,7 +70,7 @@ const showLoadingAnimation = () => {
     const incomingMessageDiv = createMessageElement(html, "incoming", "loading");
     chatList.appendChild(incomingMessageDiv);
 
-    generateAPIResponse();
+    generateAPIResponse(incomingMessageDiv);
 }
 
 // Handle sending outgoing chat messages
